@@ -7,7 +7,7 @@ import os
 import re
 import MetaTrader5 as mt5
 
-watched_folder = r'C:\Users\Kristjan\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\shared\transfers\2025_21'
+watched_folder = r'C:\Users\Uporabnik\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\shared\transfers\2025_21'
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 if not mt5.initialize():
@@ -22,6 +22,11 @@ else:
 def parse_trade_signal(text):
     lines=text.lower().splitlines()
     trade={}
+
+    symbols = mt5.symbols_get()
+    for s in symbols:
+        if "btc" in s.name.lower():
+            print(s.name)
 
     symbol_map = {
         'eurusd':'EURUSD',
